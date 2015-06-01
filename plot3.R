@@ -9,7 +9,7 @@ Sys.setlocale("LC_TIME", "English")
 
 ## Read file
 ## file must be stored in the working directory, else change path to file
-data<-read.table("C:/Users/Irene/Documents/R/Coursera/data/household_power_consumption.txt", sep=";", header=T, na.strings="?", 
+data<-read.table("household_power_consumption.txt", sep=";", header=T, na.strings="?", 
                  colClasses=c("character", "character", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric"))
 
 ## Convert date and time
