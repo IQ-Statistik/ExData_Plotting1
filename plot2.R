@@ -2,9 +2,16 @@
 ## Plotting exploratory graphs
 ## Graph 2
 
+## I am working outside US or English speaking country, so just to be sure I set the local time to English
+## in order to get time labels in English
+## Not necessary if RStudio is set to English in general
+Sys.setlocale("LC_TIME", "English")
+
 ## Read file
 ## file must be stored in the working directory, else change path to file
-data<-read.table("household_power_consumption.txt", sep=";", header=T)
+## NAs are put to be "?" and colClasses are set to match requirements
+data<-read.table("C:/Users/Irene/Documents/R/Coursera/data/household_power_consumption.txt", sep=";", header=T, na.strings="?", 
+                 colClasses=c("character", "character", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric", "numeric"))
 
 ## Convert date and time
 data$Date<-paste(data$Date,data$Time)
@@ -19,12 +26,6 @@ y<-strptime("02/02/2007 23:59:59","%d/%m/%Y %H:%M:%S")
 ## would probably be put in one file
 ## Original date & time variable dropped as merged to datetime
 data<-subset(data, (datetime>=x)&(datetime<=y), select=c(datetime, Global_active_power:Sub_metering_3))
-
-## Deal with NAs and convert variables to appropriate class
-## Only converted variables needed for this plot
-## There are no "?"-values in this variable, but to be complete, I recoded the absent NAs nonetheless ;-)
-data[data$Global_active_power=="?"]<-NA
-data$Global_active_power<-as.numeric(as.character(data$Global_active_power))
 
 ## Plot 2
 ## Open PNG file device
